@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: databaseuser
+      POSTGRES_PASSWORD: databasepassword
+      POSTGRES_DB: rinhabackendpg
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '100MB'
+
+  api1: &api
+    build: .
+    image: cedraz/rinha-de-backend-api:latest
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "200MB"
+    environment:
+      DATABASE_URL: "postgresql://databaseuser:databasepassword@db:5432/rinhabackendpg?schema=public"
+
+  api2:
+    <<: *api
+    ports:
+      - 8082:8080
+
+  

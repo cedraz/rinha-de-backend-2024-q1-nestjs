@@ -1,0 +1,28 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id     Int @id @default(autoincrement())
+  limite Int
+  saldo  Int
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id           Int      @id @default(autoincrement())
+  valor        Int
+  tipo         String
+  descricao    String
+  realizada_em DateTime
+
+  client_id Int
+  client    Client @relation(fields: [client_id], references: [id])
+}
