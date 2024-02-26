@@ -1,12 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { CreateTransactionRequestDto } from 'src/dto/transaction.dto'
-import { TransactionTypeEnum } from '../@types/enum'
 
 const prisma = new PrismaClient()
 
 export class PrismaRepository {
     async createTransaction({id, data}: {id: number, data: CreateTransactionRequestDto}) {
-        if (data.tipo === TransactionTypeEnum.CREDIT) {
+        if (data.tipo === 'c') {
             await prisma.transaction.create({
                 data: {
                     valor: data.valor,
@@ -35,7 +34,7 @@ export class PrismaRepository {
             return client
         }
 
-        if (data.tipo === TransactionTypeEnum.DEBIT) {
+        if (data.tipo === 'd') {
             const clientFound = await prisma.client.findUnique({
                 where: {
                     id
@@ -85,6 +84,14 @@ export class PrismaRepository {
                     take: 10,
                     orderBy: {
                         realizada_em: 'desc'
+                    },
+                    select: {
+                        id: false,
+                        client: false,
+                        valor: true,
+                        tipo: true,
+                        descricao: true,
+                        realizada_em: true,
                     }
                 }
             }

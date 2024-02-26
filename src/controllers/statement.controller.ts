@@ -7,7 +7,7 @@ export class StatementController {
   constructor(private readonly statementService: StatementService) {}
 
   @Get('/clientes/:id/extrato')
-  createStatement(@Param('id', ParseIntPipe) id: number)
+  createStatement(@Param('id', ParseIntPipe) id: number) : Promise<CreateStatementResponseDto>
   {
     return this.statementService.createStatement(Number(id))
   }

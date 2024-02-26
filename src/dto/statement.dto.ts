@@ -1,5 +1,3 @@
-import { TransactionTypeEnum } from 'src/@types/enum'
-
 class Saldo {
     total: number
     data_extrato: Date
@@ -8,7 +6,7 @@ class Saldo {
 
 class Transaction {
     valor: number
-    tipo: TransactionTypeEnum
+    tipo: string
     descricao: string
     realizada_em: Date
 }

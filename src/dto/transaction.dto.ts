@@ -1,16 +1,14 @@
-import { TransactionTypeEnum } from 'src/@types/enum'
-
 export class Transaction {
     id: number
     valor: number
-    tipo: TransactionTypeEnum
+    tipo: string
     descricao: string
     realizada_em: Date
 }
 
 export class CreateTransactionRequestDto {
     valor: number
-    tipo: TransactionTypeEnum
+    tipo: string
     descricao: string
 }
 

@@ -12,6 +12,22 @@ export class TransactionService {
       throw new HttpException('Client not found', 404)
     }
 
+    if (!(Number.isInteger(transactionRequest.valor) && transactionRequest.valor > 0)) {
+      throw new HttpException('Valor inválido', 422)
+    }
+
+    if (!(transactionRequest.tipo === 'c' || transactionRequest.tipo === 'd')) {
+      throw new HttpException('Tipo inválido', 422)
+    }
+
+    if (transactionRequest.descricao) {
+      if (transactionRequest.descricao.length < 1 || transactionRequest.descricao.length > 10) {
+        throw new HttpException('Descrição inválida', 422)
+      }
+    } else {
+      throw new HttpException('Descrição inválida', 422)
+    }
+
     const prismaRepository = new PrismaRepository()
     const transaction: transactionType = await prismaRepository.createTransaction({id, data: transactionRequest})
 
