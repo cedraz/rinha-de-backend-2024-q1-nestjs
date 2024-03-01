@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   db:
-    image: postgres
+    image: postgres:16-alpine
     ports:
       - "5432:5432"
     environment:
@@ -12,8 +12,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '150MB'
+          cpus: '0.6'
+          memory: '200MB'
 
   api1: &api
     build: .
@@ -23,8 +23,6 @@ services:
       - "8081:8080"
     depends_on:
       - db
-    volumes:
-      - .:/app
     deploy:
       resources:
         limits:
@@ -38,7 +36,7 @@ services:
     ports:
       - "8082:8080"
     hostname: api2
-  
+
   nginx:
     image: nginx:latest
     volumes:
@@ -51,5 +49,5 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "100MB"
+          cpus: "0.1"
+          memory: "50MB"

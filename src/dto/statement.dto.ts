@@ -1,6 +1,6 @@
 class Saldo {
     total: number
-    data_extrato: Date
+    data_extrato: string
     limite: number
 }
 

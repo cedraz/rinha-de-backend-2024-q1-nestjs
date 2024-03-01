@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "TransactionType" AS ENUM ('c', 'd');
+
 -- CreateTable
 CREATE TABLE "Client" (
     "id" SERIAL NOT NULL,
@@ -11,9 +14,9 @@ CREATE TABLE "Client" (
 CREATE TABLE "Transaction" (
     "id" SERIAL NOT NULL,
     "valor" INTEGER NOT NULL,
-    "tipo" TEXT NOT NULL,
+    "tipo" "TransactionType" NOT NULL,
     "descricao" TEXT NOT NULL,
-    "realizada_em" TIMESTAMP(3) NOT NULL,
+    "realizada_em" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "client_id" INTEGER NOT NULL,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")

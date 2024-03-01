@@ -13,16 +13,21 @@ model Client {
   limite Int
   saldo  Int
 
-  transactions Transaction[]
+  Transaction Transaction[]
 }
 
 model Transaction {
-  id           Int      @id @default(autoincrement())
+  id           Int             @id @default(autoincrement())
   valor        Int
-  tipo         String
+  tipo         TransactionType
   descricao    String
-  realizada_em DateTime
+  realizada_em DateTime        @default(now())
 
   client_id Int
   client    Client @relation(fields: [client_id], references: [id])
+}
+
+enum TransactionType {
+  c
+  d
 }

@@ -6,9 +6,9 @@ export class Transaction {
     realizada_em: Date
 }
 
-export class CreateTransactionRequestDto {
+export type CreateTransactionRequestDto = {
     valor: number
-    tipo: string
+    tipo: 'd' | 'c'
     descricao: string
 }
 

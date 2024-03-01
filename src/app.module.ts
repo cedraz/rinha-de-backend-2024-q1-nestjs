@@ -9,6 +9,9 @@ import { StatementController } from './controllers/statement.controller'
 import { TransactionService } from './services/transaction.service'
 import { StatementService } from './services/statement.service'
 
+// Repository
+// import { PrismaRepository } from './lib/prisma'
+
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
@@ -16,4 +19,4 @@ import { StatementService } from './services/statement.service'
   controllers: [TransactionController, StatementController],
   providers: [TransactionService, StatementService],
 })
-export class AppModule {}
+export class AppModule { }
